@@ -1,4 +1,3 @@
-/* $m21 */
 #include "code-gen.h"
 using namespace std;
 void tCG::init(){
@@ -186,4 +185,3 @@ int tCG::p104(){return 0;} int tCG::p105(){return 0;}
 int tCG::p106(){return 0;} int tCG::p107(){return 0;} 
 int tCG::p108(){return 0;} int tCG::p109(){return 0;} 
 int tCG::p110(){return 0;} 
-
