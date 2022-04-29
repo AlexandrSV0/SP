@@ -114,21 +114,22 @@ int tCG::p20(){ //    AROP -> /
 }
 
 int tCG::p21(){ //    COND -> ( cond BRANCHES )
-	S1->obj = "(" + S3->obj + ")";
+	S1->obj = "(" + S3->obj + "\n\t : _infinity"+")";
+//	S1->count = 0;
 	return 0;
 }
 int tCG::p22(){ //BRANCHES -> CLAUS 
 	return 0;
 }
 int tCG::p23(){ //BRANCHES -> CLAUS BRANCHES 
-	S1->obj += S2->obj;
-	++S1->count;
+	S1->obj = S1->obj + " \n\t :" + S2->obj;
+//	++S1->count;
 	return 0;
 }
 int tCG::p24(){ //   CLAUS -> ( BOOL CLAUSB )
 	if (S2->obj == "true") {
-		S1->obj += S3->obj; 
-	} else S1->obj +=  S2->obj + "\n\t?" + S3->obj + "\n\t:";
+		S1->obj += S2->obj +  " ? " + S3->obj ;
+	} else S1->obj +=  S2->obj + " ? " + S3->obj;
 	return 0;
 }
 int tCG::p25(){ //  CLAUSB -> E 
@@ -192,7 +193,7 @@ int tCG::p41(){ //  PDARGS -> ARG
 	return 0;
 }
 int tCG::p42(){ //  PDARGS -> ARG PDARGS
-	S1->obj += ",\n\t " + S2->obj + ")"; 
+	S1->obj += ",  " + S2->obj + ")"; 
 	return 0;
 }
 int tCG::p43(){ //     ARG -> E 	
@@ -202,11 +203,11 @@ int tCG::p44(){ //     ARG -> BOOL
 	return 0;
 }
 int tCG::p45(){ //     REL -> ( = E E )
-	S1->obj = "(" + S3->obj + " == " + S4->obj + ")";
+	S1->obj = S3->obj + " == " + S4->obj;
 	return 0;
 }
 int tCG::p46(){ //     REL -> ( < E E )
-	S1->obj = "(" + S3->obj + " < " + S4->obj + ")";
+	S1->obj = S3->obj + " < " + S4->obj;
 	return 0;
 }
 int tCG::p47() { //     SET -> HSET E )
@@ -316,7 +317,7 @@ int tCG::p71(){ //   PDPAR -> PDPAR $id
 	return 0;
 }
 int tCG::p72(){ //     VAR -> ( define $id VARINI )
-	S1->obj =  "double " + decor(S3->name)  +"/*"+S3->line +"*/"+  " = " + S4->obj + ";\n";
+	S1->obj =  "double " + decor(S3->name)  +"/*"+S3->line +"*/"+  " ( " +  S4->obj  + " )" + ";\n";
 	S1->name = decor(S3->name);
 	S1->line = S3->line;
 	return 0;

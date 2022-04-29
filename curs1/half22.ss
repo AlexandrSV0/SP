@@ -49,6 +49,9 @@
      (atan z)
      8e-1)
 )
+
+(cond((< e 0) 1)((= e 0) 2)((< 0 e) 3))
+
  (display"Variant 206-21\n")
 ;      a  b
  (root 1 151e-2)
